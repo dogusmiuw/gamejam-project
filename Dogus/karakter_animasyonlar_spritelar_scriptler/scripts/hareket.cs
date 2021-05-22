@@ -16,24 +16,32 @@ public class hareket : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        float scale = transform.localScale.x;
-
         float yatay = Input.GetAxis("Horizontal");
         transform.position += new Vector3(yatay*hiz,0,0);
 
         if(yatay > 0)
         {
-            transform.localScale = new Vector3(scale, scale, 1);
+            transform.localScale = new Vector3(0.8f, 0.8f, 1);
             
         } else if(yatay < 0)
         {
-            transform.localScale = new Vector3(scale*-1, scale, 1);
+            transform.localScale = new Vector3(-0.8f, 0.8f, 1);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Mesale temas");
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "asagiZemin")
+        {
+            Debug.Log("Düþtü");
+            transform.position = new Vector3(-4.06f,-1.66f,0);
+        }
+        
     }
 
     void Update()
