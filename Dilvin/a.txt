@@ -1,1 +1,2 @@
-lol
+enemyAI yüklendi
+astro=> hareket ve zıplama dosyası
