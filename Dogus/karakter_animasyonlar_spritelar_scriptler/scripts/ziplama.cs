@@ -5,7 +5,7 @@ using UnityEngine;
 public class ziplama : MonoBehaviour
 {
     public LayerMask layer;
-    public bool yerdeMi;
+    public static bool yerdeMi;
     public Rigidbody2D rb;
     public float ziplamaGucu;
     public bool doubleJump;
@@ -15,19 +15,21 @@ public class ziplama : MonoBehaviour
     {
         
     }
-
+    
     // Update is called once per frame
     void Update()
     {
         RaycastHit2D carpis = Physics2D.Raycast(transform.position,Vector2.down,0.1f,layer);
-
+        
         if(carpis.collider != null)
         {
             yerdeMi = true;
+            animasyonKontrol.FindObjectOfType<Animator>().SetBool("jump",false);
         }
         else
         {
             yerdeMi = false;
+            animasyonKontrol.FindObjectOfType<Animator>().SetBool("jump", true);
         }
 
         if(Input.GetKeyDown("w") && yerdeMi)
@@ -36,10 +38,9 @@ public class ziplama : MonoBehaviour
             doubleJump = true;
         } else if(Input.GetKeyDown("w") && !yerdeMi && doubleJump)
         {
-            rb.velocity += new Vector2(0, ziplamaGucu+2);
+            rb.velocity += new Vector2(0, ziplamaGucu);
             doubleJump = false;
         }
-
 
     }
 
